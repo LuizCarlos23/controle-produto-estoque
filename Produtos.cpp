@@ -9,7 +9,7 @@ bool ProdutosRepository::Adicionar(ProdutoDto produtoDto)
     if (this->Existe(produtoDto.Codigo)) {
         std::cout << "\nERRO!\nCODIGO DE PRODUTO JA EXISTENTE.\n";
         return false;
-    }
+    } 
 
     struct Produto produto = {
         _idAtual + 1,
@@ -182,7 +182,12 @@ float pegarNumeroValido(){
         std::cin >> input;
 
         if (verificarFloat(input)){
-            entradaValida = true;
+            if (stoi(input) > 0) {
+                entradaValida = true;
+            } else {
+                std::cout << "Entrada invalida. Nao pode ser menor ou igual a zero!\n>> Digite o preco unitario: R$";
+                while (std::cin.get() != '\n'); 
+            }
         } else{
             std::cout << "Entrada invalida.\n>> Digite o preco unitario: R$";
             while (std::cin.get() != '\n');
