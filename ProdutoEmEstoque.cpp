@@ -46,19 +46,14 @@ bool ProdutoEstoque::ProdutoEmEstoqueRepository::Remover(std::string codigoProdu
 
     for (int i = 0; i < _quantidade; i++) 
     {
-        std::cout << "Codigo Produto: " << _produtos[i].CodigoProduto;
-        std::cout << "Codigo Estoque: " << _produtos[i].CodigoEstoque;
-
         if (_produtos[i].CodigoProduto == codigoProduto && _produtos[i].CodigoEstoque == codigoEstoque)
         {
             codigoExiste = true;
-            std::cout << "AQUI\n";
         }
         else
         {
             vetorAuxiliar[contadorAuxiliar] = _produtos[i];
             contadorAuxiliar++;
-            std::cout << "Passou\n";
         }
     }
 
