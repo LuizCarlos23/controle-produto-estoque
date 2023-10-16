@@ -79,6 +79,11 @@ bool ProdutoEstoque::ProdutoEmEstoqueRepository::Remover(std::string codigoProdu
 }
 
 bool ProdutoEstoque::ProdutoEmEstoqueRepository::Baixa(std::string codigoProduto, std::string codigoEstoque, int quantidade) {
+    if (quantidade <= 0) {
+        std::cout << "\nERRO!\nQUANTIDADE INVALIDA.\n";
+        return false;
+    }
+
     ProdutoEmEstoque produtoSalvo = this->BuscarPorCod(codigoProduto, codigoEstoque);
     if (!produtoSalvo.CodigoProduto.empty()) {
         if (_produtos[produtoSalvo.Id - 1].QuantidadeProduto - quantidade > 0) {
@@ -254,6 +259,11 @@ void ProdutoEstoque::AdicionarProdutoEmEstoque(ProdutoEmEstoqueRepository * repo
     std::cout << ">> Digite a quantidade: ";
     std::cin >> quantidade;
 
+    if (quantidade <= 0) {
+        std::cout << "\nERRO!\nQUANTIDADE INVALIDA.\n";
+        return;
+    }
+
     produto = { codigoEstoque, codigoProduto, quantidade };
 
     resultado = repository->Adicionar(produto, produtosRepository, estoquesRepository);
@@ -290,12 +300,10 @@ void ProdutoEstoque::BaixaProdutoEmEstoque(ProdutoEmEstoqueRepository* repositor
     std::cout << ">> Insira a quantidade: ";
     std::cin >> quantidade;
 
-    
+
     resultado = repository->Baixa(codigoProduto, codigoEstoque, quantidade);
     if (resultado) {
         std::cout << "\nSUCESSO!\n";
-    } else {
-        std::cout << "\nOCORREU UM ERRO.\n";
     }
 }
 
