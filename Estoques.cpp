@@ -68,6 +68,7 @@ void EstoquesRepository::Listar()
 {
     if (_quantidade == 0){
         std::cout << "\nNENHUM ESTOQUE CADASTRADO\n";
+        return;
     }
     
     Table tabela;
