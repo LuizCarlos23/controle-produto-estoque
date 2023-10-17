@@ -126,11 +126,11 @@ void ProdutoEstoque::ProdutoEmEstoqueRepository::Listar() {
     }
 }
 
-void ProdutoEstoque::ProdutoEmEstoqueRepository::ListarProdutoDoEstoque(std::string codigoEstoque) {
+void ProdutoEstoque::ProdutoEmEstoqueRepository::ListarProdutoDoEstoque(std::string codigoEstoque,  ProdutosRepository * produtosRepository) {
     int quantidadeNoEstoque = 0;
     Table tabela;
 
-    tabela.add_row({"ID", "Codigo", "Quantidade"});
+    tabela.add_row({"ID", "Codigo", "Nome", "Quantidade"});
     if(_quantidade > 0) {
         std::cout << "\n====== PRODUTOS DO ESTOQUE ======\n";
         for (int i = 0; i < _quantidade; i++)
@@ -140,8 +140,9 @@ void ProdutoEstoque::ProdutoEmEstoqueRepository::ListarProdutoDoEstoque(std::str
                 // std::cout << "Codigo do Produto: " << _produtos[i].CodigoProduto << "\n";
                 // std::cout << "Quantidade no Estoque: " << _produtos[i].QuantidadeProduto << "\n";
                 // std::cout << "--------------------------------\n";
+                std::string nomeProduto = produtosRepository->BuscarPorCod(_produtos[i].CodigoProduto).Nome;
 
-                tabela.add_row({ std::to_string(_produtos[i].Id), _produtos[i].CodigoProduto, std::to_string(_produtos[i].QuantidadeProduto)});
+                tabela.add_row({ std::to_string(_produtos[i].Id), _produtos[i].CodigoProduto, nomeProduto, std::to_string(_produtos[i].QuantidadeProduto)});
 
                 quantidadeNoEstoque++;
             }
@@ -230,7 +231,7 @@ void ProdutoEstoque::MenuProdutoEmEstoque(ProdutoEmEstoqueRepository * repositor
                         repository->Listar();
                         break;
                     case 5:
-                        ListarProdutoDoEstoque(repository);
+                        ListarProdutoDoEstoque(repository, produtosRepository);
                         break;
                 }
                 break;
@@ -327,12 +328,12 @@ void ProdutoEstoque::BuscarProdutoEmEstoque(ProdutoEmEstoqueRepository* reposito
     }
 }
 
-void ProdutoEstoque::ListarProdutoDoEstoque(ProdutoEmEstoqueRepository* repository){
+void ProdutoEstoque::ListarProdutoDoEstoque(ProdutoEmEstoqueRepository* repository, ProdutosRepository * produtosRepository){
     std::string codigoProduto, codigoEstoque;
     ProdutoEmEstoque produtoEncontrado;
     std::cout << "\n====== LISTAR PRODUTOS DO ESTOQUE ======\n";
     std::cout << ">> Insira o codigo do estoque: ";
     std::cin >> codigoEstoque;
 
-    repository->ListarProdutoDoEstoque(codigoEstoque);
+    repository->ListarProdutoDoEstoque(codigoEstoque, produtosRepository);
 }

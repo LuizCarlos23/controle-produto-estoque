@@ -38,7 +38,7 @@ namespace ProdutoEstoque {
             ProdutoEmEstoque BuscarPorCod(std::string, std::string);
             bool Existe(std::string, std::string);
             int Quantidade() { return this->_quantidade; }
-            void ListarProdutoDoEstoque(std::string);
+            void ListarProdutoDoEstoque(std::string,  ProdutosRepository*);
             bool Baixa(std::string, std::string, int);
             bool EstoqueVazio(std::string);
     };
@@ -48,7 +48,7 @@ namespace ProdutoEstoque {
     void RemoverProdutoEmEstoque(ProdutoEmEstoqueRepository*);
     void BuscarProdutoEmEstoque(ProdutoEmEstoqueRepository*);
     void BaixaProdutoEmEstoque(ProdutoEmEstoqueRepository*);
-    void ListarProdutoDoEstoque(ProdutoEmEstoqueRepository*);
+    void ListarProdutoDoEstoque(ProdutoEmEstoqueRepository*,  ProdutosRepository*);
 }
 
 #endif
